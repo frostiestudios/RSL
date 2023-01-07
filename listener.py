@@ -2,9 +2,11 @@ import socket
 import webbrowser
 from appJar import gui
 
+SERVER_IP = "192.168.1.56"
+
 def receive_message():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind(("0.0.0.0", 12345))
+    s.bind((SERVER_IP, 12345))
     s.listen(1)
     print("socket created")
     conn, addr = s.accept()
@@ -28,13 +30,12 @@ def open_link_2():
     webbrowser.open("https://www.example.com/link2")
 
 app = gui("Listener")
-print("App Running")
-print("No Server Running Yet")
+print("Listener Running")
 
 app.addLabel("Server Manager")
 app.addLabel("Message", "---")
 
 app.startFrame("IP INFO")
-app.addLabel("Your IP", "Your IP: 192.168.0.121", 1, 2)
-app.addLabel("Host IP", "Host IP: 192.168.0.79", 2, 2)
-app.addIcon
+app.addLabel("Your IP", f"Your IP: {SERVER_IP}", 1, 2)
+app.stopFrame()
+app.go()
