@@ -29,11 +29,14 @@ def send_content(btn):
         data = "SIG"
     if btn == "Test":
         data = "TET"
+    if btn == "Shut Down":
+        data = "SHT"
 
 
 app = gui()
 app.addLabelEntry("Message")
 app.addButton("Restart", send_content)
+app.addButton("Shut Down", send_content)
 app.addButton("Update Drivers", send_content)
 app.addOptionBox("IP Address",["192.168.1.56","192.168.1.12"])
 app.go()
