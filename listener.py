@@ -27,7 +27,7 @@ def receive_message():
         pyautogui.hotkey('win')
         pyautogui.sleep(4) 
         pyautogui.typewrite('restart pc')
-    
+        pyautogui.press('enter')
     if data == "SIG":
         pyautogui.hotkey('win')
         pyautogui.sleep(1)
@@ -35,7 +35,11 @@ def receive_message():
         pyautogui.press('enter')
     if data == "TET":
         webbrowser.Mozilla.open("https://www.youtube.com/watch?v=0JcM8jLAfdo")
-    
+    if data == "SHT":
+        pyautogui.hotkey('win')
+        pyautogui.sleep(4) 
+        pyautogui.typewrite('shutdown pc')
+        pyautogui.press('enter')
     # Open a message window with the received message
     app = gui("Message")
     app.infoBox("Message Received", f"From{addr}")
