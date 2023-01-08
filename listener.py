@@ -16,7 +16,7 @@ def receive_message():
     data = conn.recv(1024).decode()
     print(f"Received: {data}")
     if data == "UPD":
-        webbrowser.BackgroundBrowser.open_new_tab("https://us.download.nvidia.com/Windows/528.02/528.02-desktop-win10-win11-64bit-international-dch-whql.exe")
+        webbrowser.open_new_tab("https://us.download.nvidia.com/Windows/528.02/528.02-desktop-win10-win11-64bit-international-dch-whql.exe")
     elif data == "RST":
         print("Ressetting PC")
         
