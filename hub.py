@@ -7,7 +7,6 @@ import socket
 
 def send_content(btn):
     # Get the selected options from the app
-    content_type = app.getOptionBox("Content Type")
     ip_address = app.getOptionBox("IP Address")
 
     # Send the content based on the selected type
@@ -29,9 +28,7 @@ def send_content(btn):
 
 app = gui()
 app.addLabelEntry("Message")
-app.addLabelEntry("Link")
-app.addFileEntry("File")
-app.addButton("Send", send_content)
-app.addOptionBox("Content Type",["Message","File","Command","Link"])
+app.addButton("Restart", send_content)
+app.addButton("Update Drivers", send_content)
 app.addOptionBox("IP Address",["192.168.1.56"])
 app.go()
