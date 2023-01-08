@@ -1,61 +1,49 @@
-import socket
-import webbrowser
 from appJar import gui
+import socket
 
-HUB_IP = "192.168.1.12"
-SERVER_IP = "192.168.1.56"
 
-def receive_message():
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind((SERVER_IP, 12345))
-    s.listen(1)
-    print("socket created")
-    conn, addr = s.accept()
-    print(f"Connection from {addr}")
-    # Receive and decode the message
-    data = conn.recv(1024).decode()
-    print(f"Received: {data}")
-    # Call the appropriate function based on the message received
-    if data == "Open Link 1":
-        open_link_1()
-    elif data == "Open Link 2":
-        open_link_2()
-    # Close the socket
-    conn.close()
-    receive_message()
+# Extract the IP addresses using regular expressions
 
-def open_link_1():
-    webbrowser.open("https://www.example.com/link1")
 
-def open_link_2():
-    webbrowser.open("https://www.example.com/link2")
+def send_content(btn):
+    # Get the selected options from the app
+    content_type = app.getOptionBox("Content Type")
+    ip_address = app.getOptionBox("IP Address")
 
-def send_message(button):
-    # Create a socket
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # Connect to the server
-    s.connect((SERVER_IP, 12345))
-    # Send a message to the server
-    s.sendall(button.encode())
-    # Close the socket
-    s.close()
+    # Send the content based on the selected type
+    if content_type == "Link":
+        # Send a link
+        link = app.getEntry("Link")
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect((ip_address, 12345))
+        s.sendall(link.encode())
+        s.close()
+    elif content_type == "Command":
+        # Send a command
+        command = app.getEntry("Command")
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect((ip_address, 12345))
+        s.sendall(command.encode())
+        s.close()
+    elif content_type == "File":
+        # Send a file
+        file_path = app.getEntry("File")
+        with open(file_path, "rb") as f:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((ip_address, 12345))
+            s.sendfile(f)
+            s.close()
+    elif content_type == "Message":
+        # Send a message
+        message = app.getEntry("Message")
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect((ip_address, 12345))
+        s.sendall(message.encode())
 
-def get_ip_address():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.connect(("8.8.8.8", 80))
-    return s.getsockname()[0]
 
-app = gui("HUB")
-print("HUB Running")
-
-# Get the current IP address
-ip_address = get_ip_address()
-
-app.addButtons(["Open Link 1", "Open Link 2"], [send_message, send_message])
-
-app.startFrame("IP INFO")
-app.addLabel("Your IP", f"Your IP: {ip_address}", 1, 2)
-app.addIcon("Connection", iconName="Wi-Fi", row=1, column=1)
-app.stopFrame()
-
+app = gui()
+app.addLabelEntry("Message")
+app.addFileEntry("File")
+app.addButton("Send", send_content)
+app.addOptionBox("Content Type",["Message","File","Command","Link"])
 app.go()

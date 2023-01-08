@@ -1,41 +1,43 @@
 import socket
-import webbrowser
 from appJar import gui
 
-SERVER_IP = "192.168.1.56"
-
 def receive_message():
+    # Create a socket and listen for incoming connections
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind((SERVER_IP, 12345))
+    s.bind(("0.0.0.0", 12345))
     s.listen(1)
-    print("socket created")
+
+    # Accept a connection
     conn, addr = s.accept()
     print(f"Connection from {addr}")
     # Receive and decode the message
     data = conn.recv(1024).decode()
     print(f"Received: {data}")
-    # Call the appropriate function based on the message received
-    if data == "Open Link 1":
-        open_link_1()
-    elif data == "Open Link 2":
-        open_link_2()
+
+    # Open a message window with the received message
+    app = gui("Message")
+    app.infoBox("Message Received", data)
     # Close the socket
     conn.close()
     receive_message()
+    
+def receive_file():
+    # Create a socket and listen for incoming connections
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.bind(("0.0.0.0", 12345))
+    s.listen(1)
 
-def open_link_1():
-    webbrowser.open("https://www.example.com/link1")
+    # Accept a connection
+    conn, addr = s.accept()
+    print(f"Connection from {addr}")
 
-def open_link_2():
-    webbrowser.open("https://www.example.com/link2")
+    # Receive and save the file
+    with open("received_file.bin", "wb") as f:
+        f.write(conn.recv(1024))
 
-app = gui("Listener")
-print("Listener Running")
-
-app.addLabel("Server Manager")
-app.addLabel("Message", "---")
-
-app.startFrame("IP INFO")
-app.addLabel("Your IP", f"Your IP: {SERVER_IP}", 1, 2)
-app.stopFrame()
-app.go()
+    # Close the socket
+    conn.close()
+# Create a loop to continuously listen for incoming connections
+while True:
+    receive_message()
+    receive_file()
