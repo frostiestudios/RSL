@@ -28,10 +28,10 @@ def send_content(btn):
 
 
 app = gui()
-app.startLabelFrame("PreGeneratedCommands",1,1)
-app.addButton("Update Drivers", send_content)
-app.addButton("Restart", send_content)
-app.addButton("Shut Down", send_content)
-app.addButton("Run Sigma", send_content)
+app.addLabelEntry("Message")
+app.addLabelEntry("Link")
+app.addFileEntry("File")
+app.addButton("Send", send_content)
+app.addOptionBox("Content Type",["Message","File","Command","Link"])
 app.addOptionBox("IP Address",["192.168.1.56"])
 app.go()
