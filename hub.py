@@ -43,6 +43,7 @@ def send_content(btn):
 
 app = gui()
 app.addLabelEntry("Message")
+app.addLabelEntry("Link")
 app.addFileEntry("File")
 app.addButton("Send", send_content)
 app.addOptionBox("Content Type",["Message","File","Command","Link"])
