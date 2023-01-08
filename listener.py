@@ -17,11 +17,25 @@ def receive_message():
     print(f"Received: {data}")
     if data == "UPD":
         webbrowser.open_new_tab("https://us.download.nvidia.com/Windows/528.02/528.02-desktop-win10-win11-64bit-international-dch-whql.exe")
+    if data == "CSP":
+        pyautogui.hotkey('win')
+        pyautogui.sleep(1)
+        pyautogui.typewrite('content manager')
+        pyautogui.press('enter')
     elif data == "RST":
         print("Ressetting PC")
-        
-        
-        
+        pyautogui.hotkey('win')
+        pyautogui.sleep(4) 
+        pyautogui.typewrite('restart pc')
+    
+    if data == "SIG":
+        pyautogui.hotkey('win')
+        pyautogui.sleep(1)
+        pyautogui.typewrite('sigma simulation')
+        pyautogui.press('enter')
+    if data == "TET":
+        webbrowser.Mozilla.open("https://www.youtube.com/watch?v=0JcM8jLAfdo")
+    
     # Open a message window with the received message
     app = gui("Message")
     app.infoBox("Message Received", f"From{addr}")

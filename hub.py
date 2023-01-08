@@ -23,7 +23,12 @@ def send_content(btn):
         s.connect((ip_address, 12345))
         s.sendall(data.encode())
         s.close()
-   
+    if btn == "Custom Shaders Patch":
+        data = "CSP"
+    if btn == "Open Sigma":
+        data = "SIG"
+    if btn == "Test":
+        data = "TET"
 
 
 app = gui()
