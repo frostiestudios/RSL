@@ -2,7 +2,11 @@ import socket
 import webbrowser
 import pyautogui
 from appJar import gui
-
+def startgui():
+    app=gui()
+    app.addLabel("Listener Active")
+    app.go()
+    
 def receive_message():
     # Create a socket and listen for incoming connections
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -41,12 +45,12 @@ def receive_message():
         pyautogui.typewrite('shutdown pc')
         pyautogui.press('enter')
     # Open a message window with the received message
-    app = gui("Message")
-    app.infoBox("Message Received", f"From{addr}")
-    conn.close()
+    app=gui()
+    app.setLabel("From",f"Server:{addr}")
+    app.setLabel("Data",f"Sent:{data}")
+    app.go()
     receive_message()
 
-    
 # Create a loop to continuously listen for incoming connections
 while True:
     receive_message()
