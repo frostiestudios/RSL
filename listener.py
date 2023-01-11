@@ -1,6 +1,7 @@
 import socket
 import webbrowser
 import pyautogui
+import os
 from appJar import gui
 
 def receive_message():
@@ -22,12 +23,18 @@ def receive_message():
         pyautogui.sleep(1)
         pyautogui.typewrite('content manager')
         pyautogui.press('enter')
+   
+   
+    #POWER CONTROLS
     elif data == "RST":
         print("Ressetting PC")
-        pyautogui.hotkey('win')
-        pyautogui.sleep(4) 
-        pyautogui.typewrite('restart pc')
-        pyautogui.press('enter')
+        os.system("shutdown /r /t 1")
+    elif data == "PWR":
+        print("Powering Off See Ya Later")
+        os.system("shutdown /s /t 1")
+    elif data == "LGO":
+        print("Ill be back")
+        os.system("shutdown -1")
     if data == "SIG":
         pyautogui.hotkey('win')
         pyautogui.sleep(1)
