@@ -2,11 +2,7 @@ import socket
 import webbrowser
 import pyautogui
 from appJar import gui
-def startgui():
-    app=gui()
-    app.addLabel("Listener Active")
-    app.go()
-    
+
 def receive_message():
     # Create a socket and listen for incoming connections
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -38,7 +34,8 @@ def receive_message():
         pyautogui.typewrite('sigma simulation')
         pyautogui.press('enter')
     if data == "TET":
-        webbrowser.Mozilla.open("https://www.youtube.com/watch?v=0JcM8jLAfdo")
+        print("This is A System Test Please Do Not Worry")
+        webbrowser.open("https://www.youtube.com/watch?v=0JcM8jLAfdo")
     if data == "SHT":
         pyautogui.hotkey('win')
         pyautogui.sleep(4) 
