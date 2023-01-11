@@ -59,7 +59,7 @@ def execute(btn):
 
 app = gui()
 ip1="192.168.0.71"
-ip2=""
+ip2="192.168.0.171"
 ip3=""
 ip4=""
 n1="KGB"
