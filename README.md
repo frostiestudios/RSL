@@ -1,13 +1,23 @@
-# Rouge Web Socket Server
+# Rouge Server Launcher
+Also known as rouge server manager 
+is a LAN based HTTP server that allows you to view your files that you can place in a specific folder to be shared with other PCs on the same netwotk
  
-Hello And welcome to what is a brand new\
-websocket application for using Python as well\
-as some HTML and MarkDown code \
+### Downloads 
+All downloads will be down below
+and then just click the button to download 
 
-### HUB
-The Hub Allows You to control the PCs that you have on your 
-network
-### LISTENER
-The Listener application allows the PCs to listen in for information 
-and complete the command or task that they were given whether it 
-is a file it will download or a remote restart.
+[Download .PY](https://www.example.com)
+
+[Download .EXE](https://www.example.com)
+
+**Running the Program**
+
+Instructions
+
+1. Download All the required downloads 
+2. Install 
+3. Run and Open `main.py`
+4. All Set
+
+#### Disclaimer
+_Please note that this Project is still in development and is being  worked on_ 
