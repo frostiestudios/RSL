@@ -39,6 +39,9 @@ def server(btn):
         app.setLabel("SS", "Server: Offline")
         print("Server stopped.")
         app.infoBox("Server stopped", "Server has been stopped successfully")
+    if btn == "Kill":
+        print("BYE")
+        app.stop()
 
 def openbrowser(btn):
     print(f"Opening server in browser")
@@ -68,6 +71,7 @@ app.startLabelFrame("Server", 1, 1)
 app.setLabelFont(20)
 app.addButton("Start", server)
 app.addButton("Stop", server)
+app.addButton("Kill", server)
 app.addButton("Open In Browser", openbrowser)
 app.stopLabelFrame()
 
