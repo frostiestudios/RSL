@@ -6,6 +6,7 @@ import webbrowser
 import threading
 
 
+
 def save(btn):
     link = app.getEntry("Add Link")
     with open("/htdocs/content.html", "a") as file:
@@ -58,9 +59,11 @@ def move_file(btn):
 
     file_path = app.getEntry("File")
     with open('htdocs/content.html', "a") as f:
-        f.write(f"<a href='files/{os.path.basename(file_path)}'>{os.path.basename(file_path)}</a><br>\n")
+        f.write(f"<form method='get' action='files/{os.path.basename(file_path)}'>")
+        f.write(f"<b><label>{os.path.basename(file_path)}</label></b><br>")
+        f.write(f"<button type='submit'>Download</button>")
+        f.write("<br><br>\n")
     app.infoBox("Success", "File moved successfully.")
-
 
 app = gui()
 
