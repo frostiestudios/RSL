@@ -18,7 +18,7 @@ def save(btn):
 def server(btn):
     if btn == "Start":
         host_name = socket.gethostbyname(socket.gethostname())
-        port_number = 5050
+        port_number = 5151
         # Create an HTTP server
         httpd = HTTPServer((host_name, port_number), SimpleHTTPRequestHandler)
         # Start the server in a separate thread
@@ -29,7 +29,7 @@ def server(btn):
         print("Server started at http://{}:{}/htdocs".format(*httpd.socket.getsockname()))
     if btn == "Stop":
         host_name = socket.gethostbyname(socket.gethostname())
-        port_number = 5050
+        port_number = 5151
         httpd = HTTPServer((host_name, port_number), SimpleHTTPRequestHandler)
         server_thread = threading.Thread(target=httpd.serve_forever)
         httpd.shutdown()
@@ -46,13 +46,13 @@ def server(btn):
 def openbrowser(btn):
     print(f"Opening server in browser")
     host_name = socket.gethostbyname(socket.gethostname())
-    port_number = 5050
+    port_number = 5151
     webbrowser.open(f"http://{host_name}:{port_number}/htdocs")
 
 
 def move_file(btn):
     file_path = app.getEntry("File")
-    destination = 'htdocs/files/'
+    destination = 'htdocs/files'
     os.rename(file_path, f"{destination}/{os.path.basename(file_path)}")
 
     file_path = app.getEntry("File")
