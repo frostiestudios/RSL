@@ -43,6 +43,7 @@ def server(btn):
         print("BYE")
         app.stop()
 
+
 def openbrowser(btn):
     print(f"Opening server in browser")
     host_name = socket.gethostbyname(socket.gethostname())
