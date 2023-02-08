@@ -1,3 +1,4 @@
 
 *.zip
 htdocs/content.html
+/htdocs/files/

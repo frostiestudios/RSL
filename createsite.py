@@ -8,18 +8,20 @@ settings_file = 'settings.json'
 folder_path = None
 project_name = None
 
+
 def server(button):
     if button == "Start":
         print("Starting Server")
         with open(settings_file, 'r') as file:
-                data = json.load(file)
-                folder_path = data['folder_path']
-                project_name = data['project_name']
+            data = json.load(file)
+            folder_path = data['folder_path']
+            project_name = data['project_name']
         os.chdir(os.path.join(folder_path, project_name))
         subprocess.run(['mkdocs', 'serve'])
     if button == "Open":
         webbrowser.open("http://127.0.0.1:8000/")
-        
+
+
 def create(button):
     global folder_path, project_name
     if button == "Cancel":
@@ -56,17 +58,23 @@ def create(button):
                 folder_path = data['folder_path']
                 project_name = data['project_name']
 
+
 app = gui("Create Project Folder", useTtk=True)
 app.startTabbedFrame("Tabs")
 app.startTab("Dash")
 app.setTtkTheme("alt")
 app.addLabel("title", "Create Project Folder")
-app.addLabelEntry("Project Name")
-app.addOptionBox("Select Server",[f"{folder_path}"])
-app.addButtons(["Submit", "Cancel"], create)
-app.addButtons(["Start","Open"], server)
+app.addOptionBox("Select Server", [f"{folder_path}"])
+app.addButtons(["Start", "Open"], server)
 app.stopTab()
 
 app.startTab("Settings")
 app.stopTab()
+
+app.startTab("Create A New Server")
+app.addLabelEntry("Name")
+app.addDirectoryEntry("Folder Location")
+app.addButtons(["Submit", "Cancel"], create)
+app.stopTab()
+
 app.go()

@@ -4,7 +4,7 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 from appJar import gui
 import webbrowser
 import threading
-
+import json
 
 
 def save(btn):
@@ -55,18 +55,16 @@ def openbrowser(btn):
 def move_file(btn):
     file_path = app.getEntry("File")
     file_name = app.getEntry("File Name")
-    destination = 'htdocs/files'
+    with open("settings.json", 'r') as file:
+        data = json.load(file)
+        destination = data['folder_path']
     os.rename(file_path, f"{destination}/{os.path.basename(file_path)}")
 
     with open('htdocs/content.html', "a") as f:
-        f.write(f"<div style='background-color: lightblue;'>")
-        f.write(f"<b>{file_name}</b><br>\n")
-        f.write(f"<form method='get' action='files/{os.path.basename(file_path)}'>")
-        f.write(f"<label>{os.path.basename(file_path)}</label><br>\n")
-        f.write(f"<button type='submit'>Download</button>\n")
-        f.write(f"</div>\n")
-        f.write(f"<br><br>\n")
+        f.write(f"<a href='files/{os.path.basename(file_path)}'>{file_name}</a>")
+        f.write(f"<br>\n")
     app.infoBox("Success", "File moved successfully.")
+
 
 app = gui()
 
@@ -85,7 +83,7 @@ app.stopLabelFrame()
 
 # AddFiles
 app.startLabelFrame("File Controls", 2, 1)
-app.addFileEntry("File")
+app.addLabelFileEntry("File")
 app.addLabelEntry("File Name")
 app.addButton("Move File", move_file)
 app.stopLabelFrame()
